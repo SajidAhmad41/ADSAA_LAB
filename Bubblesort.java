@@ -30,7 +30,7 @@ public class Bubblesort
   	{
   		a[i]=sc.nextInt();
   	}
-  	 System.out.println("Bubble sort result:");
+  	 System.out.println("Sorted List:");
         int[] sortedArray = bs.sort(a, n);
         for (int i = 0; i < n; i++)
          {
