@@ -36,7 +36,7 @@ public class BiconnectedComponents {
                 low[u] = Math.min(low[u], low[v]);
 
                 if ((disc[u] == 1 && children > 1) || (disc[u] > 1 && low[v] >= disc[u])) {
-                    while (stack.peek() != u || stack.peek() != v) {
+                    while (stack.peek() != u && stack.peek() != v) {
                         System.out.print(stack.pop() + " ");
                     }
                     System.out.println(stack.pop() + " " + stack.pop());
