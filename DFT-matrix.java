@@ -41,6 +41,6 @@ public static void main(String[] args) {
         graph.addEdge(3, 4);
 
         System.out.println("Breadth-First Traversal starting from vertex 0:");
-        graph.BFT(0);
+        graph.DFT(0);
     }
 }
