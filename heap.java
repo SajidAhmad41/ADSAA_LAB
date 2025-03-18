@@ -1,40 +1,51 @@
 import java.util.PriorityQueue;
+import java.util.Scanner;
+import java.util.Comparator;
 
 public class HeapExample {
-    
+
     public static void main(String[] args) {
-        // Min Heap
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        Scanner scanner = new Scanner(System.in);
 
-        // Max Heap
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
-
-        int[] elements = {3, 1, 6, 5, 2, 4};
-
-        // Insert elements into Min Heap
-        for (int elem : elements) {
-            minHeap.add(elem);
+        System.out.println("Enter integers (comma-separated):");
+        String[] input = scanner.nextLine().split(",");
+        Integer[] intElements = new Integer[input.length];
+        for (int i = 0; i < input.length; i++) {
+            intElements[i] = Integer.parseInt(input[i].trim());
         }
 
-        // Insert elements into Max Heap
-        for (int elem : elements) {
+        System.out.println("Enter the integer to delete:");
+        int deleteElement = scanner.nextInt();
+
+        demoHeap(intElements, Integer::compare, Comparator.reverseOrder(), deleteElement);
+
+        scanner.close();
+    }
+
+    public static void demoHeap(Integer[] elements, Comparator<Integer> minComparator, Comparator<Integer> maxComparator, Integer deleteElement) {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(minComparator);
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(maxComparator);
+
+        for (Integer elem : elements) {
+            minHeap.add(elem);
             maxHeap.add(elem);
         }
 
         System.out.println("Min Heap: " + minHeap);
         System.out.println("Max Heap: " + maxHeap);
 
-        // Delete an element (e.g., 3) from Min Heap
-        deleteElement(minHeap, 3);
-        System.out.println("Min Heap after deleting 3: " + minHeap);
+        deleteFromHeap(minHeap, deleteElement);
+        System.out.println("Min Heap after deleting " + deleteElement + ": " + minHeap);
 
-        // Delete an element (e.g., 3) from Max Heap
-        deleteElement(maxHeap, 3);
-        System.out.println("Max Heap after deleting 3: " + maxHeap);
+        deleteFromHeap(maxHeap, deleteElement);
+        System.out.println("Max Heap after deleting " + deleteElement + ": " + maxHeap);
     }
 
-    // Function to delete an element from the Heap
-    private static void deleteElement(PriorityQueue<Integer> heap, int element) {
-        heap.remove(element);
+    private static void deleteFromHeap(PriorityQueue<Integer> heap, Integer element) {
+        if (heap.remove(element)) {
+            System.out.println("Successfully removed " + element);
+        } else {
+            System.out.println(element + " not found in the heap.");
+        }
     }
 }
